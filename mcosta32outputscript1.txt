@@ -1,0 +1,67 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+mcosta32assign2db
+mysql
+performance_schema
+--------------
+DROP DATABASE IF EXISTS mcosta32assign2db
+--------------
+
+--------------
+CREATE DATABASE mcosta32assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE products(productid CHAR(2) NOT NULL, description CHAR(20), costperitem FLOAT NOT NULL, quantityin INT NOT NULL, PRIMARY KEY(productid))
+--------------
+
+--------------
+CREATE TABLE agents(agentid CHAR(2) NOT NULL, firstname CHAR(30), lastname CHAR(30), city CHAR(15),  commision INT, PRIMARY KEY(agentid))
+--------------
+
+--------------
+CREATE TABLE customers(customerid CHAR(2) NOT NULL, firstname CHAR(30), lastname CHAR(30), city CHAR(15), phonenumber CHAR(15), aid CHAR(2) NOT NULL, FOREIGN KEY (aid) REFERENCES agents(agentid), PRIMARY KEY(customerid))
+--------------
+
+--------------
+CREATE TABLE purchases(productkey CHAR(2) NOT NULL, FOREIGN KEY (productkey) REFERENCES products(productid),customerkey CHAR(2) NOT NULL, FOREIGN KEY (customerkey) REFERENCES customers(customerid), quantity INT NOT NULL)
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_mcosta32assign2db
+agents
+customers
+products
+purchases

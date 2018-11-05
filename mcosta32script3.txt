@@ -1,0 +1,31 @@
+USE mcosta32assign2db;
+-- QUERY 1
+SELECT description FROM products;
+-- QUERY 2
+SELECT DISTINCT city FROM customers;
+-- QUERY 3
+SELECT * FROM agents ORDER by city;
+-- QUERY 4
+SELECT firstname, lastname FROM customers WHERE city = "Springfield";
+-- QUERY 5
+SELECT lastname FROM customers WHERE aid = 11;
+-- QUERY 6
+SELECT description FROM products WHERE description LIKE "%pad%" OR description like "%Pad%";
+-- QUERY 7
+SELECT lastname,description,quantity FROM purchases,customers,products WHERE customerkey=customerid AND productkey=productid;
+-- QUERY 8
+SELECT SUM(quantity) AS "Homer's Total Purchases" FROM purchases WHERE customerkey = 21; 
+-- QUERY 9
+SELECT firstname,lastname,SUM(quantity) AS TotalPurchased FROM purchases,customers WHERE customerkey = customerid GROUP BY customerkey;
+-- QUERY 10
+SELECT DISTINCT description, quantityin FROM purchases, products, customers WHERE productid NOT IN (SELECT productkey FROM purchases);
+-- QUERY 11
+SELECT DISTINCT description, quantity FROM purchases,products,customers WHERE firstname != "Fred" AND lastname != "Flintstone" AND customerkey !=15 AND productkey=productid;
+-- QUERY 12
+SELECT agents.firstname, agents.lastname, customers.firstname, customers.lastname FROM customers, agents WHERE aid = agentid AND agents.city = customers.city; 
+-- QUERY 13
+SELECT SUM(quantity) AS "Total knee pads purchased" FROM purchases WHERE productkey =78;
+-- QUERY 14
+SELECT description FROM products, purchases, customers WHERE customerkey = customerid AND productkey=productid GROUP by productkey HAVING count(customerid) > 3;
+-- QUERY 15
+SELECT agents.firstname, agents.lastname FROM agents, customers, purchases WHERE productkey = 78 AND customerkey = customerid AND aid = agentid;

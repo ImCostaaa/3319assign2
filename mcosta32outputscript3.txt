@@ -1,0 +1,195 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SELECT description FROM products
+--------------
+
+description
+Bike
+Socks
+Hockey stick
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT city FROM customers
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agents ORDER by city
+--------------
+
+agentid firstname       lastname        city    commision
+33      David   Letterman       Bedrock 100
+11      Regis   Philbin Boston  33
+1       Matthew Costa   Mississauga     100
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SELECT description FROM products
+--------------
+
+description
+Bike
+Socks
+Hockey stick
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT city FROM customers
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agents ORDER by city
+--------------
+
+agentid firstname       lastname        city    commision
+33      David   Letterman       Bedrock 100
+11      Regis   Philbin Boston  33
+1       Matthew Costa   Mississauga     100
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SELECT description FROM products
+--------------
+
+description
+Bike
+Socks
+Hockey stick
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT city FROM customers
+--------------
+
+city
+Boston
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agents ORDER by city
+--------------
+
+agentid	firstname	lastname	city	commision
+33	David	Letterman	Bedrock	100
+11	Regis	Philbin	Boston	33
+1	Matthew	Costa	Mississauga	100
+22	Courtney	Cox	New York	25
+12	Rosie	Cox	Ottawa	50
+66	Rosie	ODonnell	Ottawa	100
+99	Hugh	Grant	Springfield	16
+--------------
+SELECT firstname, lastname FROM customers WHERE city = "Springfield"
+--------------
+
+firstname	lastname
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+SELECT lastname FROM customers WHERE aid = 11
+--------------
+
+lastname
+Rubble
+Flintstone
+--------------
+SELECT description FROM products WHERE description LIKE "%pad%" OR description like "%Pad%"
+--------------
+
+description
+Elbow pads
+Knee Pads
+--------------
+SELECT lastname,description,quantity FROM purchases,customers,products WHERE customerkey=customerid AND productkey=productid
+--------------
+
+lastname	description	quantity
+Griffens	Elbow pads	19
+Flintstone	Elbow pads	2
+Flintstone	Knee Pads	2
+Simpson	Helmet	20
+Simpson	Socks	14
+Simpson	Elbow pads	10
+Bob	Helmet	5
+Bob	Socks	5
+Bob	Knee Pads	5
+Bob	Elbow pads	5
+--------------
+SELECT SUM(quantity) AS "Homer's Total Purchases" FROM purchases WHERE customerkey = 21
+--------------
+
+Homer's Total Purchases
+44
+--------------
+SELECT firstname,lastname,SUM(quantity) AS TotalPurchased FROM purchases,customers WHERE customerkey = customerid GROUP BY customerkey
+--------------
+
+firstname	lastname	TotalPurchased
+Peter	Griffens	19
+Fred	Flintstone	4
+Homer	Simpson	44
+Sideshow	Bob	20
+--------------
+SELECT DISTINCT description, quantityin FROM purchases, products, customers WHERE productid NOT IN (SELECT productkey FROM purchases)
+--------------
+
+description	quantityin
+Bike	200
+Hockey stick	100
+Roller Blades	89
+--------------
+SELECT DISTINCT description, quantity FROM purchases,products,customers WHERE firstname != "Fred" AND lastname != "Flintstone" AND customerkey !=15 AND productkey=productid
+--------------
+
+description	quantity
+Socks	14
+Socks	5
+Elbow pads	10
+Elbow pads	5
+Elbow pads	19
+Knee Pads	5
+Helmet	20
+Helmet	5
+--------------
+SELECT agents.firstname, agents.lastname, customers.firstname, customers.lastname FROM customers, agents WHERE aid = agentid AND agents.city = customers.city
+--------------
+
+firstname	lastname	firstname	lastname
+Regis	Philbin	Barney	Rubble
+Hugh	Grant	Monty	Burns
+Regis	Philbin	Fred	Flintstone
+Hugh	Grant	Homer	Simpson
+--------------
+SELECT SUM(quantity) AS "Total knee pads purchased" FROM purchases WHERE productkey =78
+--------------
+
+Total knee pads purchased
+7
+--------------
+SELECT description FROM products, purchases, customers WHERE customerkey = customerid AND productkey=productid GROUP by productkey HAVING count(customerid) > 3
+--------------
+
+description
+Elbow pads
+--------------
+SELECT agents.firstname, agents.lastname FROM agents, customers, purchases WHERE productkey = 78 AND customerkey = customerid AND aid = agentid
+--------------
+
+firstname	lastname
+Regis	Philbin
+Rosie	ODonnell
