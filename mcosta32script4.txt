@@ -1,0 +1,19 @@
+-- incase for some reason a different database was selected
+USE mcosta32assign2db;
+SELECT * FROM products;
+SELECT * FROM customers;
+SELECT * FROM purchases;
+SELECT * FROM agents;
+CREATE VIEW purchased AS 
+SELECT customers.firstname, customers.lastname, products.description, purchases.quantity, products.costperitem, purchases.quantity*products.costperitem AS "Total Price"
+FROM purchases
+INNER JOIN customers ON (customerkey = customerid)
+INNER JOIN products ON (productkey = productid)
+ORDER by lastname;
+SELECT * FROM purchased;
+SELECT * FROM purchased WHERE quantity*costperitem > 100;
+DELETE FROM products WHERE productid = 17;
+SELECT * FROM products;
+DELETE FROM agents WHERE city = "Springfield";
+SELECT * FROM agents;
+--doesn't delete as agents has their agent id in use as foreeign keys elsewhere therfore cant delete.
